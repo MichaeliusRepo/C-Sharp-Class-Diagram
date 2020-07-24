@@ -1,0 +1,145 @@
+﻿<Window x:Class="Class_Diagram.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Class_Diagram.View"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+        xmlns:ViewModel="clr-namespace:Class_Diagram.ViewModel"
+        xmlns:UserControls="clr-namespace:Class_Diagram.View.UserControls"
+        mc:Ignorable="d"
+        Title="Class Diagram" Height="666" Width="666">
+    <Window.DataContext>
+        <ViewModel:MainViewModel/>
+    </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding NewDiagramCommand}" Gesture="CTRL+N" />
+        <KeyBinding Command="{Binding OpenDiagramCommand}" Gesture="CTRL+O"/>
+        <KeyBinding Command="{Binding SaveDiagramCommand}" Gesture="CTRL+S"/>
+        <KeyBinding Command="{Binding UndoCommand}" Gesture="CTRL+Z"/>
+        <KeyBinding Command="{Binding RedoCommand}" Gesture="CTRL+Y"/>
+        <KeyBinding Command="{Binding CutCommand}" Gesture="CTRL+X"/>
+        <KeyBinding Command="{Binding CopyCommand}" Gesture="CTRL+C"/>
+        <KeyBinding Command="{Binding PasteCommand}" Gesture="CTRL+V"/>
+        <KeyBinding Command="{Binding DeleteCommand}" Gesture="Delete"/>
+    </Window.InputBindings>
+    
+<!-- If the .xaml file refuses to show a markup, open the Nuget Console and type in the following:
+        Uninstall-Package MvvmLightLibs
+        Install-Package MvvmLightLibs
+    -->
+
+    <!-- This is the Menubar Section -->
+    <DockPanel Name="dockPanel_main" LastChildFill="True">
+
+        <Menu DockPanel.Dock="Top" HorizontalAlignment="Left" VerticalAlignment="Top" Width="{Binding ElementName=dockPanel_main,Path=ActualWidth}">
+            <MenuItem Header="File">
+                <MenuItem Header="New" HorizontalAlignment="Left" Command="{Binding NewCommand}" Width="140"/>
+                <MenuItem Header="Open" HorizontalAlignment="Left" Command="{Binding OpenCommand}" Width="140"/>
+                <MenuItem Header="Save" HorizontalAlignment="Left" Command="{Binding SaveCommand}" Width="140"/>
+                <Separator HorizontalAlignment="Left" Width="140"/>
+                <MenuItem Header="Export" HorizontalAlignment="Left" Command="{Binding ExportCommand}" Width="140"/>
+                <Separator HorizontalAlignment="Left" Width="140"/>
+                <MenuItem Header="Exit" HorizontalAlignment="Left" Command="{Binding ExitCommand}" Width="140"/>
+
+            </MenuItem>
+
+            <MenuItem Header="Edit">
+                <MenuItem Header="Undo" HorizontalAlignment="Left" Command="{Binding UndoCommand}" Width="140"/>
+                <MenuItem Header="Redo" HorizontalAlignment="Left" Command="{Binding RedoCommand}" Width="140"/>
+                <Separator HorizontalAlignment="Left" Width="140"/>
+                <MenuItem Header="Cut" HorizontalAlignment="Left" Command="{Binding CutCommand}" Width="140"/>
+                <MenuItem Header="Copy" HorizontalAlignment="Left" Command="{Binding CopyCommand}" Width="140"/>
+                <MenuItem Header="Paste" HorizontalAlignment="Left" Command="{Binding PasteCommand}" Width="140"/>
+                <Separator HorizontalAlignment="Left" Width="140"/>
+                <MenuItem Header="Rename" HorizontalAlignment="Left" Command="{Binding RenameCommand}" Width="140"/>
+                <MenuItem Header="Delete" HorizontalAlignment="Left" Command="{Binding DeleteCommand}" Width="140"/>
+
+            </MenuItem>
+
+        </Menu>
+
+        <!-- This is the Status Bar Section -->
+
+        <Border DockPanel.Dock="Bottom" Height="24" VerticalAlignment="Bottom" Cursor="Arrow">
+            <StatusBar x:Name="StatusBar">
+                <StatusBar.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="65" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="75" />
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ItemsPanelTemplate>
+                </StatusBar.ItemsPanel>
+                <StatusBarItem Grid.Column="0" HorizontalAlignment="Left">
+                    <TextBlock Text="{Binding Message}"/>
+                </StatusBarItem>
+                <Separator Grid.Column="1" />
+                <StatusBarItem Grid.Column="2" HorizontalAlignment="Right">
+                    <TextBlock Text="{Binding MouseXY}"/>
+                </StatusBarItem>
+                <Separator Grid.Column="3" />
+                <StatusBarItem Grid.Column="4" HorizontalAlignment="Right">
+                    <TextBlock Text="{Binding ClassAmount}"/>
+                </StatusBarItem>
+                <Separator Grid.Column="5" />
+                <StatusBarItem Grid.Column="6" HorizontalAlignment="Right">
+                    <TextBlock Text="{Binding LinesAmount}"/>
+                </StatusBarItem>
+                <Separator Grid.Column="7" />
+                <StatusBarItem Grid.Column="8" HorizontalAlignment="Right">
+                    <TextBlock Text="{Binding Zoom}"/>
+                </StatusBarItem>
+            </StatusBar>
+        </Border>
+
+        <Border DockPanel.Dock="Left" Width="160" HorizontalAlignment="Left" BorderBrush="#383838" BorderThickness="3" Background="#2A2A2A">
+
+            <!--<UserControls:ClassUserControl Margin="10" VerticalAlignment="Top" HorizontalAlignment="Center"/>-->
+
+            <UserControls:SidePanelUserControl/>
+
+        </Border>
+
+        <Border Background="#262626" BorderBrush="#303030" BorderThickness="3" Panel.ZIndex="-1">
+
+            <Grid x:Name="MainCanvas" Background="#262626">
+
+                <ItemsControl ItemsSource="{Binding Dots}"/>
+
+                <ItemsControl ItemsSource="{Binding Lines}"/>
+                <ItemsControl ItemsSource="{Binding Classes}"/>
+                
+                <Grid.LayoutTransform>
+                    <ScaleTransform CenterX="{Binding MousePoint.X}" CenterY="{Binding MousePoint.Y}" ScaleX="{Binding ZoomValue}" ScaleY="{Binding ZoomValue}"/>
+                </Grid.LayoutTransform>
+
+            </Grid>
+        </Border>
+
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="MouseLeftButtonUp">
+                <cmd:EventToCommand Command="{Binding DataContext.MouseLeftButtonUpCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" PassEventArgsToCommand="True"/>
+            </i:EventTrigger>
+            <i:EventTrigger EventName="MouseMove">
+                <cmd:EventToCommand Command="{Binding DataContext.MouseMoveCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" PassEventArgsToCommand="True"/>
+            </i:EventTrigger>
+            <i:EventTrigger EventName="MouseWheel">
+                <cmd:EventToCommand Command="{Binding DataContext.MouseWheelCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" PassEventArgsToCommand="True"/>
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+
+        
+
+    </DockPanel>
+</Window>

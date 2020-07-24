@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="Class_Diagram.View.UserControls.LineUserControl"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:local="clr-namespace:Class_Diagram.View.UserControls"
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+      xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      Focusable="True"
+      d:DesignHeight="300" d:DesignWidth="300">
+
+    <Grid>
+        <Line Stroke="White" X1="{Binding To.CanvasCenterX}" Y1="{Binding To.CanvasCenterY}" X2="{Binding TopX}" Y2="{Binding TopY}" StrokeThickness="2">
+            <Line.Style>
+                <Style TargetType="Line">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Style}" Value="Solid">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Style}" Value="Dashed">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Line.Style>
+        </Line>
+        <Line Stroke="White" X1="{Binding To.CanvasCenterX}" Y1="{Binding To.CanvasCenterY}" X2="{Binding BottomX}" Y2="{Binding BottomY}" StrokeThickness="2">
+            <Line.Style>
+                <Style TargetType="Line">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Style}" Value="Solid">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Style}" Value="Dashed">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Line.Style>
+        </Line>
+
+        <Line Stroke="White"  X1="{Binding From.CanvasCenterX}" Y1="{Binding From.CanvasCenterY}" X2="{Binding To.CanvasCenterX}" Y2="{Binding To.CanvasCenterY}" StrokeThickness="2">
+            <Line.Style>
+                <Style TargetType="Line">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Style}" Value="Dashed">
+                            <Setter Property="StrokeDashArray" Value="2 2"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Line.Style>
+        </Line>
+    </Grid>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="MouseDown">
+            <cmd:EventToCommand Command="{Binding DataContext.MouseDownObjectCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" PassEventArgsToCommand="True"/>
+        </i:EventTrigger>
+
+    </i:Interaction.Triggers>
+
+</UserControl>

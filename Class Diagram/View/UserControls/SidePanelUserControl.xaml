@@ -1,0 +1,106 @@
+﻿<UserControl x:Class="Class_Diagram.View.UserControls.SidePanelUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Class_Diagram.View.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="666" d:DesignWidth="160">
+    <StackPanel Width="150">
+
+        <GroupBox Header="Shapes" Foreground="White" Margin="6">
+            <!-- This StackPanel organizes its content from top to bottom. -->
+            <StackPanel>
+
+                <Image Source="../Images/iconClass.png" Height="56" Margin="6">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDown">
+                            <cmd:EventToCommand Command="{Binding DragAndDropClassCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+
+                <Image Source="../Images/iconInterface.png" Height="56" Margin="6">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDown">
+                            <cmd:EventToCommand Command="{Binding DragAndDropInterfaceCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+
+                <Image Source="../Images/iconAbstract.png" Height="56" Margin="6">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDown">
+                            <cmd:EventToCommand Command="{Binding DragAndDropAbstractCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+
+                <Image Source="../Images/iconEnumeration.png" Height="56" Margin="6">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDown">
+                            <cmd:EventToCommand Command="{Binding DragAndDropEnumerationCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+
+                <Image Source="../Images/iconDot.png" Height="56" Margin="6">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDown">
+                            <cmd:EventToCommand Command="{Binding DragAndDropDotCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+
+                <!--<Image Source="../Images/iconInterface.png" Height="56" MouseDown="{Binding DragAndDropClassCommand}" />
+                <Image Source="../Images/iconAbstract.png" Height="56" MouseDown="{Binding DragAndDropClassCommand}" />
+                <Image Source="../Images/iconEnumeration.png" Height="56" MouseDown="{Binding DragAndDropClassCommand}" />
+                <Image Source="../Images/iconDot.png" Height="56" MouseDown="{Binding DragAndDropClassCommand}" />
+
+                <Button Content="Add class"  Command="{Binding DragAndDropClassCommand}"/>
+                <Button Content="Add interface" Command="{Binding DragAndDropInterfaceCommand}"/>
+                <Button Content="Add abstract" Command="{Binding DragAndDropAbstractCommand}"/>
+                <Button Content="Add enumeration" Command="{Binding DragAndDropEnumerationCommand}"/>
+                <Button Content="Add dot" Command="{Binding DragAndDropDotCommand}"/>-->
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Lines" Foreground="White" Margin="6">
+            <StackPanel>
+
+                <Image Source="../Images/iconSolid.png" Height="30" Margin="6">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDown">
+                            <cmd:EventToCommand Command="{Binding AddSolidCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+
+                <Image Source="../Images/iconDashed.png" Height="30" Margin="6">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDown">
+                            <cmd:EventToCommand Command="{Binding AddDashedCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+
+                <Image Source="../Images/iconArrow.png" Height="30" Margin="6">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDown">
+                            <cmd:EventToCommand Command="{Binding AddArrowCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+
+                <!--<Button Content="Add line" Command="{Binding AddLineCommand}"/>
+                <Button Content="Add dashed line" Command="{Binding AddDashedLineCommand}"/>
+                <Button Content="Add arrow" Command="{Binding AddArrowCommand}"/>-->
+            </StackPanel>
+        </GroupBox>
+
+        <TextBox x:Name="ObjectName" Height="23" TextWrapping="NoWrap" Text="{Binding ClassName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="120"/>
+        
+    </StackPanel>
+</UserControl>

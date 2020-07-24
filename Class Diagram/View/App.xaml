@@ -1,0 +1,29 @@
+﻿<Application x:Class="Class_Diagram.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Class_Diagram.View"
+             xmlns:Model="clr-namespace:Class_Diagram.Model;assembly=ClassDiagram.Model"
+             xmlns:UserControls="clr-namespace:Class_Diagram.View.UserControls"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        
+        <DataTemplate DataType="{x:Type Model:Class}" x:Name="ClassCanvas">
+            <Canvas>
+                <UserControls:ClassUserControl/>
+            </Canvas>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type Model:Line}">
+            <Canvas>
+                <UserControls:LineUserControl/>
+            </Canvas>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type Model:Dot}">
+            <Canvas>
+                <UserControls:DotUserControl/>
+            </Canvas>
+        </DataTemplate>
+
+    </Application.Resources>
+</Application>
