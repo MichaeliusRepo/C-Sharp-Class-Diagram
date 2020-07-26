@@ -23,7 +23,7 @@ The program contains a few examples of how unit tests works in C#, but this proj
 
 ## Images
 
-![ok](https://imgur.com/pB3uyzm)
+![ok](https://imgur.com/pB3uyzm.png)
 
 
 
