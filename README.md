@@ -1,7 +1,3 @@
-# C-Class-Diagram
-Class Diagram designer in C# WPF
-
-
 ## License
 
 This software has no license. The hosting of this project at GitHub allows you to view this repository, however you retain no permission from the creators of this software to use, modify or share this software for any intent or purpose.
